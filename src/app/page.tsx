@@ -2,13 +2,19 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export default function Home() {
+  function handleOpenCreateNoteModal() {}
+
   return (
     <div className="flex flex-col items-center justify-center gap-5 min-h-screen p-8 pb-20  font-[family-name:var(--font-geist-sans)] bg-black">
       <div className="flex justify-between items-center max-w-[1000px] w-full">
         <h1 className="text-white font-semibold text-xl">
           <span className="font-normal">Next</span> Notes
         </h1>
-        <Button variant={"outline"} className="font-semibold">
+        <Button
+          variant={"outline"}
+          className="font-semibold"
+          onClick={handleOpenCreateNoteModal}
+        >
           Criar nota
         </Button>
       </div>
