@@ -3,10 +3,10 @@
 import { SessionProvider } from "next-auth/react";
 
 interface ProvidersProps {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 // Wraps the application with SessionProvider to enable authentication context
 export function Providers({ children }: ProvidersProps) {
-  return <SessionProvider>{children}</SessionProvider>;
+	return children;
 }
