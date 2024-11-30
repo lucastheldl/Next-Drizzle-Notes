@@ -3,6 +3,7 @@ import ThemeProvider from "../components/ThemeProvider";
 
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { Header } from "./_components/header";
 
 export const metadata: Metadata = {
 	title: "Next Notes",
@@ -23,6 +24,7 @@ export default function RootLayout({
 		<html lang="en">
 			<ThemeProvider>
 				<body className={`${montserrat.className} antialiased `}>
+					<Header />
 					{children}
 				</body>
 			</ThemeProvider>
