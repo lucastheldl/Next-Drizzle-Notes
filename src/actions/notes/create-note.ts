@@ -1,16 +1,26 @@
 "use server";
-import { actionClient } from "@/lib/safe-action";
-import z from "zod";
 
-const noteSchema = z.object({
-  title: z.string().min(1).max(100),
-  body: z.string(),
-  color: z.string(),
-  authorId: z.string(),
-});
+import { db } from "@/server/db";
+import { notesSchema } from "@/server/db/schema";
+import { revalidatePath } from "next/cache";
 
-export const createNote = actionClient
-  .schema(noteSchema)
-  .action(async ({ parsedInput: { title, body, color, authorId } }) => {
-    return { failure: "Incorrect credentials" };
-  });
+
+export const createNote = async (formData: FormData) => {
+
+	try {
+		const note:typeof notesSchema.$inferInsert={
+			title:"Nova nota",
+			body:"",
+			color:"white",
+			authorId:"1"
+		}
+		await db.insert(notesSchema).values(note);
+		
+		revalidatePath('/');
+	} catch (error) {
+		return {
+			success: false,
+			error: "Falha ao criar notas",
+		  };
+	}
+};

@@ -23,6 +23,7 @@ export const notesSchema = pgTable("notes", {
 
 export const notesRelations = relations(notesSchema, ({ one }) => ({
 	author: one(usersSchema, {
+		relationName: "userNotes",
 		fields: [notesSchema.authorId],
 		references: [usersSchema.id],
 	}),

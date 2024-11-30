@@ -2,11 +2,15 @@ import { Card } from "@/components/ui/card";
 import { IconDots } from "@tabler/icons-react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-export function Note() {
+
+type NotePropsType={
+	title:string;
+}
+export function Note({title}:NotePropsType) {
 	return (
 		<Card className="bg-transparent p-7 border-zinc-500 text-gray-900 dark:text-white col-span-4">
 			<div className="flex justify-between items-center">
-				<h3 className="font-semibold">Title</h3>
+				<h3 className="font-semibold">{title}</h3>
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger asChild>
 						<button type="button" aria-label="Customise options">
