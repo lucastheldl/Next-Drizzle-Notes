@@ -9,7 +9,7 @@ const ThemeProvider = ({ children }) => {
 		setMounted(true);
 	}, []);
 
-	if (!mounted) return <>{children}</>;
+	if (!mounted) return null;
 
 	return <NextThemesProvider attribute="class">{children}</NextThemesProvider>;
 };
