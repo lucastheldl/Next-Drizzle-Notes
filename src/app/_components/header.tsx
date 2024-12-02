@@ -47,7 +47,7 @@ export function Header() {
 						type="submit"
 						onClick={handleCreateNote}
 						variant={"outline"}
-						className="font-semibold"
+						className="font-semibold text-gray-900 dark:text-white"
 					>
 						{isCreating ? "Criando..." : "Criar nota"}
 					</Button>

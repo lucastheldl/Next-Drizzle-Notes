@@ -5,7 +5,7 @@ export default async function Home() {
 	const { success, notes, error } = await getAllNotes();
 
 	return (
-		<div className="flex flex-col items-center justify-start gap-5 min-h-screen p-8 pb-20  font-[family-name:var(--font-geist-sans)] bg-white dark:bg-black">
+		<div className="flex flex-col items-center justify-start gap-5 min-h-screen p-8 pb-20  bg-white dark:bg-black">
 			<div className="grid grid-cols-8 items-center justify-items-center gap-2 max-w-[1000px] h-fit">
 				{success ? (
 					// biome-ignore lint/style/noNonNullAssertion: <explanation>

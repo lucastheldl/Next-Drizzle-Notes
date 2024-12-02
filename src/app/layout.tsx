@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ThemeProvider from "../components/ThemeProvider";
+import { ThemeProvider } from "next-themes";
 
 import { Montserrat } from "next/font/google";
 import "./globals.css";
@@ -21,13 +21,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<ThemeProvider>
-				<body className={`${montserrat.className} antialiased `}>
+		<html lang="en" suppressHydrationWarning>
+			<body className={`${montserrat.className} antialiased `}>
+				<ThemeProvider attribute="class">
 					<Header />
 					{children}
-				</body>
-			</ThemeProvider>
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }
