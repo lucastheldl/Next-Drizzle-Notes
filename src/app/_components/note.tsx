@@ -1,12 +1,26 @@
+"use client";
 import { Card } from "@/components/ui/card";
 import { IconDots } from "@tabler/icons-react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { deleteNote } from "@/actions/notes/delete-note";
+import { useRouter } from "next/navigation";
 
-
-type NotePropsType={
-	title:string;
-}
-export function Note({title}:NotePropsType) {
+type NotePropsType = {
+	id: string;
+	title: string;
+};
+export function Note({ id, title }: NotePropsType) {
+	const router = useRouter();
+	async function handleDeleteNote() {
+		try {
+			await deleteNote({ id });
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
+	function handleEditNote() {
+		router.push(`/notes/${id}`);
+	}
 	return (
 		<Card className="bg-transparent p-7 border-zinc-500 text-gray-900 dark:text-white col-span-4">
 			<div className="flex justify-between items-center">
@@ -21,7 +35,11 @@ export function Note({title}:NotePropsType) {
 					<DropdownMenu.Portal>
 						<DropdownMenu.Content className="bg-white border-2 border-zinc-500 dark:bg-black rounded-md p-2">
 							<DropdownMenu.Item>
-								<button type="button" aria-label="editar">
+								<button
+									type="button"
+									onClick={handleEditNote}
+									aria-label="editar"
+								>
 									Editar
 								</button>
 							</DropdownMenu.Item>
@@ -31,7 +49,11 @@ export function Note({title}:NotePropsType) {
 								</button>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item>
-								<button type="button" aria-label="deletar">
+								<button
+									type="button"
+									onClick={handleDeleteNote}
+									aria-label="deletar"
+								>
 									Deletar
 								</button>
 							</DropdownMenu.Item>

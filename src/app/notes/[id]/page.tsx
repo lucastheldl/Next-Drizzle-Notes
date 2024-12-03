@@ -4,7 +4,8 @@ import { Suspense } from "react";
 import Loading from "./loading";
 
 export default async function NotePage({ params }: { params: { id: string } }) {
-	const res = await getNote({ id: params.id });
+	const { id } = await params;
+	const res = await getNote({ id: id });
 	if (res?.data && !res.data.success) {
 		notFound();
 	}
