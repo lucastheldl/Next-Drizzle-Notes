@@ -20,6 +20,7 @@
 		"@radix-ui/react-slot": "^1.1.0",
 		"@tabler/icons-react": "^3.23.0",
 		"@vercel/postgres": "^0.10.0",
+		"add": "^2.0.6",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"dotenv": "^16.4.5",
@@ -35,6 +36,7 @@
 		"react": "19.0.0-rc-66855b96-20241106",
 		"react-dom": "19.0.0-rc-66855b96-20241106",
 		"shadcn": "^2.1.6",
+		"skeleton": "^0.1.2",
 		"tailwind-merge": "^2.5.4",
 		"tailwindcss-animate": "^1.0.7",
 		"zod": "^3.23.8"

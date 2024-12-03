@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { createNote } from "@/actions/notes/create-note";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 export function Header() {
 	const router = useRouter();
@@ -36,10 +37,12 @@ export function Header() {
 	return (
 		<div className="flex flex-col items-center justify-start p-8 bg-white dark:bg-black">
 			<div className="flex justify-between items-center max-w-[1000px] w-full">
-				<h1 className="flex items-center gap-2 text-gray-900 dark:text-white font-semibold text-xl">
-					<span className="font-normal">Next</span> Notes
-					<IconNote />
-				</h1>
+				<Link href={"/"}>
+					<h1 className="flex items-center gap-2 text-gray-900 dark:text-white font-semibold text-xl">
+						<span className="font-normal">Next</span> Notes
+						<IconNote />
+					</h1>
+				</Link>
 				<div className="flex gap-2 items-center">
 					<ThemeSwitch />
 
