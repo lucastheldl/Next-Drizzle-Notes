@@ -8,5 +8,6 @@ interface ProvidersProps {
 
 // Wraps the application with SessionProvider to enable authentication context
 export function Providers({ children }: ProvidersProps) {
-	return children;
+	/* return children; */
+	return <SessionProvider>{children}</SessionProvider>;
 }

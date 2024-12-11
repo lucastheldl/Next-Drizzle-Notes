@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";
@@ -8,7 +7,7 @@ import * as schema from "./schema";
  * update.
  */
 const globalForDb = globalThis as unknown as {
-  conn: postgres.Sql | undefined;
+	conn: postgres.Sql | undefined;
 };
 
 const conn = globalForDb.conn ?? postgres(process.env.DATABASE_URL as string);

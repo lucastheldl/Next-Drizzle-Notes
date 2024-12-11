@@ -6,14 +6,17 @@ import { createNote } from "@/actions/notes/create-note";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export function Header() {
 	const router = useRouter();
 	const [isCreating, setIsCreating] = useState(false);
+	const { data: session } = useSession();
+
 	const handleCreateNote = async () => {
 		try {
 			setIsCreating(true);
-			const result = await createNote();
+			const result = await createNote(session?.user.id);
 			if (result.success) {
 				router.push(`/notes/${result.id}`);
 			} else {

@@ -1,8 +1,10 @@
 import { Note } from "./_components/note";
 import { getAllNotes } from "@/actions/notes/get-all-notes";
+import { auth } from "@/auth";
 
 export default async function Home() {
-	const { success, notes, error } = await getAllNotes();
+	const session = await auth();
+	const { success, notes, error } = await getAllNotes(session?.user.id);
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-5 min-h-screen p-8 pb-20  bg-white dark:bg-black">

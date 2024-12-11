@@ -5,13 +5,13 @@ import { notesSchema } from "@/server/db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const createNote = async () => {
+export const createNote = async (userId) => {
 	try {
 		const note: typeof notesSchema.$inferInsert = {
 			title: "Nova nota",
 			body: "",
 			color: "white",
-			authorId: "1",
+			authorId: userId,
 		};
 		const res = await db.insert(notesSchema).values(note).returning();
 

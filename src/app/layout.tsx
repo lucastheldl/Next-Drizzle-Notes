@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Providers } from "./providers";
 
 import { Montserrat } from "next/font/google";
 import "./globals.css";
@@ -24,8 +25,10 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${montserrat.className} antialiased `}>
 				<ThemeProvider attribute="class">
-					<Header />
-					{children}
+					<Providers>
+						<Header />
+						{children}
+					</Providers>
 				</ThemeProvider>
 			</body>
 		</html>

@@ -11,7 +11,7 @@ export const usersSchema = pgTable("user", {
 
 	name: varchar("name", { length: 255 }).notNull(),
 	email: varchar("email", { length: 255 }).notNull().unique(),
-	passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+	passwordHash: varchar("password_hash", { length: 255 }),
 	emailVerified: timestamp("emailVerified", { mode: "date" }),
 	image: text("image"),
 });
