@@ -5,7 +5,7 @@ import { notesSchema } from "@/server/db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const createNote = async (userId) => {
+export const createNote = async (userId: string) => {
 	try {
 		const note: typeof notesSchema.$inferInsert = {
 			title: "Nova nota",

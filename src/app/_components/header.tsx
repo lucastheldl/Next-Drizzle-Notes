@@ -16,7 +16,8 @@ export function Header() {
 	const handleCreateNote = async () => {
 		try {
 			setIsCreating(true);
-			const result = await createNote(session?.user.id);
+			console.log("creating note");
+			const result = await createNote(session!.user.id);
 			if (result.success) {
 				router.push(`/notes/${result.id}`);
 			} else {
