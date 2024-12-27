@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 type NotePropsType = {
 	id: string;
 	title: string;
+	body: string;
 };
-export function Note({ id, title }: NotePropsType) {
+export function Note({ id, title, body }: NotePropsType) {
 	const router = useRouter();
 	async function handleDeleteNote() {
 		try {
@@ -22,7 +23,7 @@ export function Note({ id, title }: NotePropsType) {
 		router.push(`/notes/${id}`);
 	}
 	return (
-		<Card className="bg-transparent p-7 border-zinc-500 text-gray-900 dark:text-white col-span-4">
+		<Card className="bg-transparent p-7 border-zinc-500 text-gray-900 dark:text-white col-span-4 w-full">
 			<div className="flex justify-between items-center">
 				<h3 className="font-semibold">{title}</h3>
 				<DropdownMenu.Root>
@@ -61,12 +62,7 @@ export function Note({ id, title }: NotePropsType) {
 					</DropdownMenu.Portal>
 				</DropdownMenu.Root>
 			</div>
-			<p className="mt-3">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas a iste
-				incidunt perspiciatis molestias maxime reiciendis sapiente rerum modi
-				inventore voluptatibus, debitis cum excepturi minima culpa? Molestiae
-				officiis expedita aut?
-			</p>
+			<p className="mt-3">{body ? body : "Uma nota qualquer..."}</p>
 		</Card>
 	);
 }

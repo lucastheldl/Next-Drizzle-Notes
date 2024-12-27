@@ -13,7 +13,7 @@ export function Header() {
 	const [isCreating, setIsCreating] = useState(false);
 	const { data: session } = useSession();
 
-	const handleCreateNote = async () => {
+	async function handleCreateNote() {
 		try {
 			setIsCreating(true);
 			console.log("creating note");
@@ -36,7 +36,7 @@ export function Header() {
 		} finally {
 			setIsCreating(false);
 		}
-	};
+	}
 
 	return (
 		<div className="flex flex-col items-center justify-start p-8 bg-white dark:bg-black">
