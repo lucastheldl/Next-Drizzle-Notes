@@ -7,12 +7,12 @@ import { z } from "zod";
 import { actionClient } from "@/lib/safe-action";
 import { revalidatePath } from "next/cache";
 
-const noteSchema = z.object({
+const noteSchemaZod = z.object({
 	id: z.string(),
 });
 
 export const deleteNote = actionClient
-	.schema(noteSchema)
+	.schema(noteSchemaZod)
 	.action(async ({ parsedInput: { id } }) => {
 		try {
 			await db.delete(notesSchema).where(eq(notesSchema.id, id));

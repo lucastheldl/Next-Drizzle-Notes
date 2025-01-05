@@ -6,12 +6,12 @@ import { db } from "@/server/db";
 import { z } from "zod";
 import { actionClient } from "@/lib/safe-action";
 
-const noteSchema = z.object({
+const noteSchemaZod = z.object({
 	id: z.string(),
 });
 
 export const getNote = actionClient
-	.schema(noteSchema)
+	.schema(noteSchemaZod)
 	.action(async ({ parsedInput: { id } }) => {
 		try {
 			const note = await db.query.notesSchema.findFirst({
