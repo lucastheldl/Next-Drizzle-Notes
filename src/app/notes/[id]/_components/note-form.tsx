@@ -2,22 +2,34 @@
 import { IconBook, IconPencil } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { editNote } from "@/actions/notes/edit-note";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
+import { useState } from "react";
+import type { NoteColors } from "@/@types";
+import { toast } from "sonner";
 
 type NoteFormPropsType = {
 	session: Session;
 	res: {
-		data: { note: { id: string; title: string; body: string; color: string } };
+		data: {
+			note: { id: string; title: string; body: string; color: NoteColors };
+		};
 	};
 };
 export function NoteForm({ session, res }: NoteFormPropsType) {
+	const [noteTitle, setNoteTitle] = useState("");
+	const [noteBody, setNoteBody] = useState("");
+	const [noteColor, setNoteColor] = useState<NoteColors>("white");
+
 	async function handleSaveNote() {
 		try {
 			const data = await editNote({
 				title: "Título atualizado",
-				body: "Atualkizada para corrigir o bug",
+				body: noteBody,
 				color: "red",
 				noteId: res.data.note.id,
+			});
+			toast.success("Sucesso", {
+				description: "Nota Salva!",
 			});
 			console.log(data);
 		} catch (error) {
@@ -55,13 +67,9 @@ export function NoteForm({ session, res }: NoteFormPropsType) {
 					<textarea
 						className="w-full min-h-[600px] leading-8 focus:outline-none bg-transparent lined-textarea"
 						placeholder="Escreva uma nota..."
+						onChange={(e) => setNoteBody(e.target.value)}
 					/>
 				</div>
-
-				{/* 	<textarea
-        className="w-full min-h-[600px] focus:border-none focus:outline-none "
-        placeholder="Escreva uma nota..."
-    /> */}
 			</div>
 		</div>
 	);

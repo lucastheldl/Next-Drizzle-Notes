@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_components/header";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
 	title: "Next Notes",
@@ -28,6 +29,12 @@ export default function RootLayout({
 					<Providers>
 						<Header />
 						{children}
+						<Toaster
+							toastOptions={{
+								className:
+									"bg-white ring-1 ring-black dark:bg-black dark:text-white",
+							}}
+						/>
 					</Providers>
 				</ThemeProvider>
 			</body>

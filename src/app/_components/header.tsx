@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 export function Header() {
 	const router = useRouter();
@@ -17,22 +18,18 @@ export function Header() {
 		try {
 			setIsCreating(true);
 			console.log("creating note");
-			const result = await createNote(session!.user.id);
-			if (result.success) {
-				router.push(`/notes/${result.id}`);
+			const result = await createNote({ userId: session?.user.id as string });
+			if (result?.data?.success) {
+				router.push(`/notes/${result?.data.id}`);
 			} else {
-				/* toast({
-					title: "Error",
-					description: result.error || "Failed to create note",
-					variant: "destructive",
-				}); */
+				toast.error("Error", {
+					description: "Falha ao criar nota!",
+				});
 			}
 		} catch (error) {
-			/* toast({
-				title: "Error",
-				description: "An unexpected error occurred",
-				variant: "destructive",
-			}); */
+			toast.success("Sucesso", {
+				description: "Nota criada!",
+			});
 		} finally {
 			setIsCreating(false);
 		}
