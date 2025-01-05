@@ -1,28 +1,36 @@
 "use server";
 
+import { actionClient } from "@/lib/safe-action";
 import { db } from "@/server/db";
 import { notesSchema } from "@/server/db/schema";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 
-export const createNote = async (userId: string) => {
-	try {
-		const note: typeof notesSchema.$inferInsert = {
-			title: "Nova nota",
-			body: "",
-			color: "white",
-			authorId: userId,
-		};
-		const res = await db.insert(notesSchema).values(note).returning();
+const noteSchemaZod = z.object({
+	userId: z.string(),
+});
 
-		const id = res[0]?.id;
+export const createNote = actionClient
+	.schema(noteSchemaZod)
+	.action(async ({ parsedInput: { userId } }) => {
+		try {
+			const note: typeof notesSchema.$inferInsert = {
+				title: "Nova nota",
+				body: "",
+				color: "white",
+				authorId: userId,
+			};
+			const res = await db.insert(notesSchema).values(note).returning();
 
-		revalidatePath("/");
+			const id = res[0]?.id;
 
-		return { success: true, id: id };
-	} catch (error) {
-		return {
-			success: false,
-			error: "Falha ao criar notas",
-		};
-	}
-};
+			revalidatePath("/");
+
+			return { success: true, id: id };
+		} catch (error) {
+			return {
+				success: false,
+				error: "Falha ao criar notas",
+			};
+		}
+	});
