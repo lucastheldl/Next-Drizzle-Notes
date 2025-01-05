@@ -42,7 +42,9 @@ export function Note({ id, title, body, color }: NotePropsType) {
 				<div className="flex flex-col">
 					<h3 className="font-semibold">{title}</h3>
 
-					<p className="mt-3">{body ? body : "Uma nota qualquer..."}</p>
+					<p className="mt-3 break-all">
+						{body ? body : "Uma nota qualquer..."}
+					</p>
 				</div>
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger asChild>

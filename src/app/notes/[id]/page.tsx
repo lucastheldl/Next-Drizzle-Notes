@@ -16,7 +16,7 @@ export default async function NotePage({ params }: { params: { id: string } }) {
 
 	return (
 		<Suspense fallback={<Loading />}>
-			<NoteForm session={session} res={res} />
+			<NoteForm res={res} />
 		</Suspense>
 	);
 }

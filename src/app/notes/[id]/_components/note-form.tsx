@@ -10,17 +10,18 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { cn } from "@/lib/utils";
 
 type NoteFormPropsType = {
-	session: Session | null;
 	res: {
 		data: {
 			note: { id: string; title: string; body: string; color: NoteColors };
 		};
 	} | null;
 };
-export function NoteForm({ session, res }: NoteFormPropsType) {
-	const [noteTitle, setNoteTitle] = useState("Nova nota");
-	const [noteBody, setNoteBody] = useState("Escreva uma nova nota...");
-	const [noteColor, setNoteColor] = useState<NoteColors>("white");
+export function NoteForm({ res }: NoteFormPropsType) {
+	const [noteTitle, setNoteTitle] = useState(res?.data?.note.title as string);
+	const [noteBody, setNoteBody] = useState(res?.data?.note.body as string);
+	const [noteColor, setNoteColor] = useState<NoteColors>(
+		res?.data?.note.color as NoteColors,
+	);
 
 	async function handleSaveNote() {
 		try {
@@ -28,13 +29,12 @@ export function NoteForm({ session, res }: NoteFormPropsType) {
 				title: noteTitle,
 				body: noteBody,
 				color: noteColor,
-				noteId: res.data.note.id,
+				noteId: res?.data?.note.id as string,
 			});
 
 			toast.success("Sucesso", {
 				description: "Nota Salva!",
 			});
-			console.log(data);
 		} catch (error) {
 			console.log(error);
 			throw new Error(error);
@@ -101,7 +101,7 @@ export function NoteForm({ session, res }: NoteFormPropsType) {
 							type="text"
 							className="text-xl bg-transparent focus:outline-none w-full"
 							onChange={(e) => setNoteTitle(e.target.value)}
-							defaultValue={res?.data?.note?.title}
+							defaultValue={noteTitle}
 						/>
 					</div>
 
@@ -125,6 +125,7 @@ export function NoteForm({ session, res }: NoteFormPropsType) {
 					<textarea
 						className="w-full min-h-[600px] leading-8 focus:outline-none bg-transparent lined-textarea"
 						placeholder="Escreva uma nota..."
+						defaultValue={noteBody}
 						onChange={(e) => setNoteBody(e.target.value)}
 					/>
 				</div>
