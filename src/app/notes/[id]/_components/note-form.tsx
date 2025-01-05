@@ -23,9 +23,9 @@ export function NoteForm({ session, res }: NoteFormPropsType) {
 	async function handleSaveNote() {
 		try {
 			const data = await editNote({
-				title: "Título atualizado",
+				title: noteTitle,
 				body: noteBody,
-				color: "red",
+				color: noteColor,
 				noteId: res.data.note.id,
 			});
 			toast.success("Sucesso", {
@@ -41,12 +41,13 @@ export function NoteForm({ session, res }: NoteFormPropsType) {
 		<div className="relative flex flex-col text-black dark:text-white justify-start gap-5 min-h-screen p-8 pb-20 bg-white dark:bg-black">
 			<div className="max-w-5xl mx-auto w-full px-8">
 				<div className="flex justify-between">
-					<div className="inline-flex gap-4 items-center">
-						<h3 className="font-bold text-lg">{res?.data?.note?.title}</h3>
-						<button type="button">
-							<IconPencil size={20} />
-						</button>
-					</div>
+					<input
+						type="text"
+						className="text-xl bg-transparent focus:outline-none w-full max-w-lg"
+						onChange={(e) => setNoteTitle(e.target.value)}
+						defaultValue={res?.data?.note?.title}
+					/>
+
 					<Button
 						type="button"
 						onClick={handleSaveNote}

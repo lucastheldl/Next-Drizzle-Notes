@@ -10,7 +10,7 @@ export default async function Home() {
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-5 min-h-screen p-8 pb-20  bg-white dark:bg-black">
-			<div className="grid grid-cols-8 items-center justify-items-center gap-2 w-full max-w-[1000px] h-fit">
+			<div className="grid grid-cols-8 items-center justify-items-center gap-4 w-full max-w-[1000px] h-fit">
 				{res?.data?.success ? (
 					// biome-ignore lint/style/noNonNullAssertion: <explanation>
 					res?.data.notes!.map((note) => <Note key={note.id} {...note} />)

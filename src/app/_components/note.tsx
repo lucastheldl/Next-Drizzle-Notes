@@ -22,10 +22,16 @@ export function Note({ id, title, body }: NotePropsType) {
 	function handleEditNote() {
 		router.push(`/notes/${id}`);
 	}
+	function handleDuplicateNote() {}
+
 	return (
-		<Card className="bg-transparent p-7 border-zinc-500 text-gray-900 dark:text-white col-span-4 w-full">
-			<div className="flex justify-between items-center">
-				<h3 className="font-semibold">{title}</h3>
+		<Card className="bg-transparent px-7 py-4 border-zinc-500 text-gray-900 dark:text-white col-span-4 w-full h-full">
+			<div className="flex justify-between items-start">
+				<div className="flex flex-col">
+					<h3 className="font-semibold">{title}</h3>
+
+					<p className="mt-3">{body ? body : "Uma nota qualquer..."}</p>
+				</div>
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger asChild>
 						<button type="button" aria-label="Customise options">
@@ -45,7 +51,11 @@ export function Note({ id, title, body }: NotePropsType) {
 								</button>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item>
-								<button type="button" aria-label="duplicar">
+								<button
+									type="button"
+									aria-label="duplicar"
+									onClick={handleDuplicateNote}
+								>
 									Duplicar
 								</button>
 							</DropdownMenu.Item>
@@ -62,7 +72,6 @@ export function Note({ id, title, body }: NotePropsType) {
 					</DropdownMenu.Portal>
 				</DropdownMenu.Root>
 			</div>
-			<p className="mt-3">{body ? body : "Uma nota qualquer..."}</p>
 		</Card>
 	);
 }
