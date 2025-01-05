@@ -7,6 +7,7 @@ export default async function Home() {
 	const res = await getAllNotes({
 		userId: session?.user.id as string,
 	});
+	console.log(res?.data?.notes);
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-5 min-h-screen p-8 pb-20  bg-white dark:bg-black">

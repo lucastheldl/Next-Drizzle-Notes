@@ -24,6 +24,7 @@ export const editNote = actionClient
 				.returning();
 
 			const id = res[0]?.id;
+			console.log(color);
 
 			revalidatePath("/");
 
