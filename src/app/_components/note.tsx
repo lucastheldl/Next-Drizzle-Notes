@@ -38,53 +38,56 @@ export function Note({ id, title, body, color }: NotePropsType) {
 					color === "green" && "bg-green-600",
 				)}
 			/>
-			<div className="flex justify-between items-start">
-				<div className="flex flex-col">
-					<h3 className="font-semibold">{title}</h3>
+			<div className="flex flex-col">
+				<div className="flex justify-between">
+					<div className="max-h-12 overflow-hidden">
+						<h3 className="font-semibold">{title}</h3>
+					</div>
+					<div className="flex flex-col justify-start">
+						<DropdownMenu.Root>
+							<DropdownMenu.Trigger asChild>
+								<button type="button" aria-label="Customise options">
+									<IconDots />
+								</button>
+							</DropdownMenu.Trigger>
 
-					<p className="mt-3 break-all">
-						{body ? body : "Uma nota qualquer..."}
-					</p>
+							<DropdownMenu.Portal>
+								<DropdownMenu.Content className="bg-white border-2 border-zinc-500 dark:bg-black rounded-md p-2">
+									<DropdownMenu.Item>
+										<button
+											type="button"
+											onClick={handleEditNote}
+											aria-label="editar"
+										>
+											Editar
+										</button>
+									</DropdownMenu.Item>
+									<DropdownMenu.Item>
+										<button
+											type="button"
+											aria-label="duplicar"
+											onClick={handleDuplicateNote}
+										>
+											Duplicar
+										</button>
+									</DropdownMenu.Item>
+									<DropdownMenu.Item>
+										<button
+											type="button"
+											onClick={handleDeleteNote}
+											aria-label="deletar"
+										>
+											Deletar
+										</button>
+									</DropdownMenu.Item>
+								</DropdownMenu.Content>
+							</DropdownMenu.Portal>
+						</DropdownMenu.Root>
+					</div>
 				</div>
-				<DropdownMenu.Root>
-					<DropdownMenu.Trigger asChild>
-						<button type="button" aria-label="Customise options">
-							<IconDots />
-						</button>
-					</DropdownMenu.Trigger>
-
-					<DropdownMenu.Portal>
-						<DropdownMenu.Content className="bg-white border-2 border-zinc-500 dark:bg-black rounded-md p-2">
-							<DropdownMenu.Item>
-								<button
-									type="button"
-									onClick={handleEditNote}
-									aria-label="editar"
-								>
-									Editar
-								</button>
-							</DropdownMenu.Item>
-							<DropdownMenu.Item>
-								<button
-									type="button"
-									aria-label="duplicar"
-									onClick={handleDuplicateNote}
-								>
-									Duplicar
-								</button>
-							</DropdownMenu.Item>
-							<DropdownMenu.Item>
-								<button
-									type="button"
-									onClick={handleDeleteNote}
-									aria-label="deletar"
-								>
-									Deletar
-								</button>
-							</DropdownMenu.Item>
-						</DropdownMenu.Content>
-					</DropdownMenu.Portal>
-				</DropdownMenu.Root>
+				<p className="mt-3 break-all max-h-32 overflow-hidden">
+					{body ? body : "Uma nota qualquer..."}
+				</p>
 			</div>
 		</Card>
 	);
